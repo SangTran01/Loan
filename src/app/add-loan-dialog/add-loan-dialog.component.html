@@ -1,6 +1,11 @@
-<h2 mat-dialog-title>Add New Client</h2>
+<h2 mat-dialog-title>{{ !isUpdate ? "Add New Client" : "Update Client" }}</h2>
 <mat-dialog-content class="mat-typography">
   <form [formGroup]="form">
+    <mat-form-field appearance="outline" [hidden]="true">
+      <mat-label>First Name</mat-label>
+      <input matInput placeholder="id" [formControl]="id" />
+      <mat-error *ngIf="id.invalid">{{ getErrorMessage() }}</mat-error>
+    </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>First Name</mat-label>
       <input
@@ -46,5 +51,7 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button cdkFocusInitial (click)="addLoan()">Submit</button>
+  <button mat-button cdkFocusInitial (click)="addLoan()">
+    {{ isUpdate ? "Update" : "Submit" }}
+  </button>
 </mat-dialog-actions>

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { RouterModule, Routes } from '@angular/router';
@@ -11,6 +11,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { HttpClientModule } from '@angular/common/http';
+
 import { AddLoanDialogComponent } from './add-loan-dialog/add-loan-dialog.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -19,7 +21,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { HttpClientModule } from '@angular/common/http';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { LoanListComponent } from './loan-list/loan-list.component';
+import { DataService } from './data-service';
+
 const routes: Routes = [];
 
 @NgModule({
@@ -29,6 +36,7 @@ const routes: Routes = [];
     PropertyListComponent,
     NavBarComponent,
     AddLoanDialogComponent,
+    LoanListComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,8 +51,17 @@ const routes: Routes = [];
     MatFormFieldModule,
     MatInputModule,
     HttpClientModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: 'en-CA',
+    },
+    DataService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
